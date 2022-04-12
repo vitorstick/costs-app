@@ -1,0 +1,21 @@
+<div class="costs-container">
+  <div class="costs-container__header">
+    <h3>
+      Costs
+    </h3>
+    <div class="costs-container__form-group" *ngIf="rateForm">
+      <form [formGroup]="rateForm">
+        <label for="costs-container__input-from">From</label>
+        <select>
+          <option *ngFor="let item of paymentCurrencies" [value]="item">{{item.toCurrency}}</option>
+        </select>
+
+      </form>
+    </div>
+  </div>
+  <div class="costs-container__content">
+    <ng-container *ngFor="let cost of costElements">
+      <app-cost-element [cost]="cost"></app-cost-element>
+    </ng-container>
+  </div>
+</div>

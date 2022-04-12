@@ -1,0 +1,8 @@
+<ng-container *ngIf="costElement$ | async as costElement; else loading">
+  <app-cost-table [costs]="costElement" [exchangeRates]="exchangeRates$ | async"></app-cost-table>
+</ng-container>
+<ng-template #loading>
+  <p>
+    Loading...
+  </p>
+</ng-template>
