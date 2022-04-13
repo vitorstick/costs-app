@@ -1,7 +1,14 @@
 <div class="costs-container">
   <div class="costs-container__header">
-
+    <div class="costs-container__header-name">{{ cost?.name }}</div>
+    <div class="costs-container__header-code">Account code</div>
+    <div class="costs-container__header-quoted">Quoted</div>
+    <div class="costs-container__header-screened">Screened</div>
+    <div class="costs-container__header-messages"></div>
   </div>
   <div class="costs-container__content">
-
+    <ng-container *ngFor="let costItem of cost?.costItems">
+      <app-cost-item [costItem]="costItem"></app-cost-item>
+    </ng-container>
   </div>
+</div>

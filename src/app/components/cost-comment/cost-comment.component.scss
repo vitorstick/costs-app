@@ -1,0 +1,23 @@
+.comment-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+
+  &__type {
+    width: 10%;
+  }
+  &__comment {
+    width: 60%;
+  }
+  &__author {
+    width: 10%;
+  }
+  &__date {
+    width: 10%;
+  }
+  &__actions {
+    width: 10%;
+  }
+}

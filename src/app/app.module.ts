@@ -7,6 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CostElementComponent, CostTableComponent } from './components';
 import { CostsContainerComponent } from './containers';
+import { CostItemComponent } from './components/cost-item/cost-item.component';
+import { CostCommentComponent } from './components/cost-comment/cost-comment.component';
+import { NewCommentComponent } from './components/new-comment/new-comment.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +17,9 @@ import { CostsContainerComponent } from './containers';
     CostsContainerComponent,
     CostElementComponent,
     CostTableComponent,
+    CostItemComponent,
+    CostCommentComponent,
+    NewCommentComponent,
   ],
   imports: [
     BrowserModule,

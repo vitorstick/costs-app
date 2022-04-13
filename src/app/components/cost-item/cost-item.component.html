@@ -1,0 +1,19 @@
+<div class="costs-item-container">
+  <div class="costs-item-container__header">
+    <div class="costs-item-container__header-name">{{ costItem?.name }}</div>
+    <div class="costs-item-container__header-code">
+      {{ costItem?.costItemAlias?.accountingCode }}
+    </div>
+    <div class="costs-item-container__header-quoted"></div>
+    <div class="costs-item-container__header-screened"></div>
+    <div class="costs-item-container__header-messages">
+      {{ commentsNumber }}
+    </div>
+  </div>
+  <div class="costs-item-container__comments">
+    <ng-container *ngFor="let comment of comments">
+      <app-cost-comment [comment]="comment"></app-cost-comment>
+    </ng-container>
+    <app-new-comment></app-new-comment>
+  </div>
+</div>

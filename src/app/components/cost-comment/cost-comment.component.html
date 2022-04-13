@@ -1,0 +1,9 @@
+<div class="comment-container">
+  <div class="comment-container__type">{{ comment?.type }}</div>
+  <div class="comment-container__comment">{{ comment?.comment }}</div>
+  <div class="comment-container__author">{{ comment?.author }}</div>
+  <div class="comment-container__date">
+    {{ comment?.date | date: "medium" }}
+  </div>
+  <div class="comment-container__actions"></div>
+</div>

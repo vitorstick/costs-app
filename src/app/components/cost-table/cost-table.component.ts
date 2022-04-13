@@ -56,7 +56,7 @@ export class CostTableComponent implements OnInit {
 
   private createRateForm(rates: ExchangeRateInterface) {
     this.rateForm = new FormGroup({
-      rate: new FormControl(rates.sourceCurrency),
+      rate: new FormControl(''),
     });
   }
 }
