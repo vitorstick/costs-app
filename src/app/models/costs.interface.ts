@@ -1,3 +1,5 @@
+import { CommentType } from './type.enum';
+
 export interface CostViewModel {
   baseCurrency: BaseCurrencyInterface;
   daCurrency: DaCurrencyInterface;
@@ -49,6 +51,8 @@ export interface CommentInterface {
   persona: string;
   author: string;
   comment: string;
-  type: string;
+  type: CommentType;
   date: Date;
 }
+
+export type NewComment = Pick<CommentInterface, 'type' | 'comment'>;

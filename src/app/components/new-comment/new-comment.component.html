@@ -1,15 +1,20 @@
-<form [formGroup]="commentForm" ngForm>
-  <select placeholder="Select comment type" formControlName="type">
-    <option *ngFor="let item of commentType" [value]="item">
-      {{ item }}
-    </option>
-  </select>
-  <input
-    type="text"
-    placeholder="Type comment"
-    formControlName="comment"
-    [disabled]="getTypeInvalid"
-  />
-  <!-- [disabled]="commentForm?.controls?.get('type').invalid" -->
-  <button (click)="add()" [disabled]="commentForm.invalid">Add</button>
+<form [formGroup]="commentForm" ngForm class="comment-form">
+  <div class="comment-form__type">
+    <select placeholder="Select comment type" formControlName="type">
+      <option *ngFor="let item of commentType" [value]="item">
+        {{ item }}
+      </option>
+    </select>
+  </div>
+  <div class="comment-form__comment">
+    <input
+      type="text"
+      placeholder="Type comment"
+      formControlName="comment"
+      [disabled]="getTypeInvalid"
+    />
+  </div>
+  <div class="comment-form__button">
+    <button (click)="add()" [disabled]="commentForm.invalid">Add</button>
+  </div>
 </form>

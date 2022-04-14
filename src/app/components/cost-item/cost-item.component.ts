@@ -4,6 +4,7 @@ import {
   CommentInterface,
   CostItemInterface,
   DaCurrencyInterface,
+  NewComment,
 } from 'src/app/models';
 
 @Component({
@@ -15,6 +16,8 @@ export class CostItemComponent implements OnInit {
   @Input('costItem') costItem: CostItemInterface | undefined;
   @Input('baseCurrency') baseCurrency: BaseCurrencyInterface | undefined;
   @Input('daCurrency') daCurrency: DaCurrencyInterface | undefined;
+  // TODO: LOGGED IN USER FOR AUTHOR?
+  @Input('author') author: string = 'Mr. John Doe';
 
   get commentsNumber(): number {
     return this.costItem?.comments?.length ?? 0;
@@ -27,4 +30,18 @@ export class CostItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  addComment(newComment: NewComment) {
+    const comment: CommentInterface = {
+      ...newComment,
+      date: new Date(),
+      // TODO: NEED TO GENERATE ID
+      id: this.comments.length + 101,
+      daStage: '',
+      persona: '',
+      author: this.author,
+    };
+
+    this.costItem?.comments?.push(comment);
+  }
 }

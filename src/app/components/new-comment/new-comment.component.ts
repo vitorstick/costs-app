@@ -6,7 +6,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CommentType } from 'src/app/models';
+import { CommentType, NewComment } from 'src/app/models';
 
 @Component({
   selector: 'app-new-comment',
@@ -15,7 +15,8 @@ import { CommentType } from 'src/app/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewCommentComponent implements OnInit {
-  @Output() readonly addComment: EventEmitter<string> = new EventEmitter();
+  @Output() readonly addCommentEmitter: EventEmitter<NewComment> =
+    new EventEmitter();
 
   commentForm!: FormGroup;
 
@@ -35,12 +36,21 @@ export class NewCommentComponent implements OnInit {
     this.createCommentForm();
   }
 
-  add() {}
+  add() {
+    if (this.commentForm.valid) {
+      this.addCommentEmitter.emit(this.commentForm.getRawValue());
+      this.commentForm.reset();
+    }
+  }
 
   private createCommentForm() {
     this.commentForm = new FormGroup({
       type: new FormControl('', Validators.required),
-      comment: new FormControl(''),
+      comment: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(100),
+      ]),
     });
   }
 }

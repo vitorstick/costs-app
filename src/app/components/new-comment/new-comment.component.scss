@@ -1,0 +1,25 @@
+.comment-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px;
+  border-top: 1px solid #ccc;
+
+  &__comment {
+    width: 80%;
+
+    input {
+      width: 100%;
+    }
+  }
+  &__type {
+    width: 10%;
+
+    select {
+      width: 100%;
+    }
+  }
+  div {
+    padding: 0 8px;
+  }
+}
