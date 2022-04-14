@@ -4,8 +4,16 @@
     <div class="costs-item-container__header-code">
       {{ costItem?.costItemAlias?.accountingCode }}
     </div>
-    <div class="costs-item-container__header-quoted"></div>
-    <div class="costs-item-container__header-screened"></div>
+    <div class="costs-item-container__header-quoted">
+      <div>
+        {{ quotedCost }}
+      </div>
+      <div class="converted-value">{{ getExchangeRateValue(1, 1) }}</div>
+    </div>
+    <div class="costs-item-container__header-screened">
+      {{ screenedCost }}
+      <div class="converted-value">{{ getExchangeRateValue(1, 1) }}</div>
+    </div>
     <div class="costs-item-container__header-messages">
       {{ commentsNumber }}
     </div>

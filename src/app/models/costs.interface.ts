@@ -1,4 +1,4 @@
-import { CommentType } from './type.enum';
+import { CommentType, CostType } from './type.enum';
 
 export interface CostViewModel {
   baseCurrency: BaseCurrencyInterface;
@@ -41,7 +41,7 @@ export interface AnnotationInterface {
 export interface CostItemCostInterface {
   daStage: string;
   persona: string;
-  type: string;
+  type: CostType;
   amount: number;
 }
 

@@ -1,8 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { CalculationHelper } from 'src/app/helpers/calculation-helper';
 import {
   BaseCurrencyInterface,
   CommentInterface,
+  CostItemCostInterface,
   CostItemInterface,
+  CostType,
   DaCurrencyInterface,
   NewComment,
 } from 'src/app/models';
@@ -11,6 +19,7 @@ import {
   selector: 'app-cost-item',
   templateUrl: './cost-item.component.html',
   styleUrls: ['./cost-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CostItemComponent implements OnInit {
   @Input('costItem') costItem: CostItemInterface | undefined;
@@ -25,6 +34,20 @@ export class CostItemComponent implements OnInit {
 
   get comments(): CommentInterface[] {
     return this.costItem?.comments ?? [];
+  }
+
+  get quotedCost(): number {
+    const costItem = this.costItem?.costs?.find(
+      (cost) => cost.type === CostType.Quoted
+    );
+    return costItem?.amount ?? 0;
+  }
+
+  get screenedCost(): number {
+    const costItem = this.costItem?.costs?.find(
+      (cost) => cost.type === CostType.Screened
+    );
+    return costItem?.amount ?? 0;
   }
 
   constructor() {}
@@ -43,5 +66,9 @@ export class CostItemComponent implements OnInit {
     };
 
     this.costItem?.comments?.push(comment);
+  }
+
+  getExchangeRateValue(fromCurrency: number, rate: number): number {
+    return CalculationHelper.getValue(fromCurrency, rate);
   }
 }

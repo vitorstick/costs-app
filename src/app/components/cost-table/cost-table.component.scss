@@ -9,8 +9,19 @@
   margin: 0;
 
   &__header {
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    padding: 8px;
   }
+}
+
+.costs-container__form-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.costs-container__header-ratio {
+  padding: 0 4px;
 }

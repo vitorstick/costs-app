@@ -1,15 +1,22 @@
 <div class="costs-container">
   <div class="costs-container__header">
-    <h3>Costs</h3>
+    <div class="costs-container__header-title">Costs</div>
     <div class="costs-container__form-group" *ngIf="rateForm">
       <form [formGroup]="rateForm">
-        <label for="costs-container__input-from">Currency</label>
+        <label for="costs-container__input-from">Currency </label>
         <select formControlName="rate">
-          <option *ngFor="let item of paymentCurrencies" [value]="item">
+          <option
+            *ngFor="let item of paymentCurrencies"
+            [value]="item.toCurrency"
+          >
             {{ item.toCurrency }}
           </option>
         </select>
       </form>
+      <div class="costs-container__header-ratio">
+        1 {{ baseCurrency?.currency }} {{ exchangeRate }}
+        {{ selectedPaymentCurrencies?.toCurrency }}
+      </div>
     </div>
   </div>
   <div class="costs-container__content">
