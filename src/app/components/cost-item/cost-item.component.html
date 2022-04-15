@@ -8,11 +8,15 @@
       <div>
         {{ quotedCost }}
       </div>
-      <div class="converted-value">{{ getExchangeRateValue(1, 1) }}</div>
+      <div class="converted-value">
+        <app-cost-converted [costValue]="quotedCost"></app-cost-converted>
+      </div>
     </div>
     <div class="costs-item-container__header-screened">
       {{ screenedCost }}
-      <div class="converted-value">{{ getExchangeRateValue(1, 1) }}</div>
+      <div class="converted-value">
+        <app-cost-converted [costValue]="screenedCost"></app-cost-converted>
+      </div>
     </div>
     <div class="costs-item-container__header-messages">
       {{ commentsNumber }}
@@ -20,7 +24,11 @@
   </div>
   <div class="costs-item-container__comments">
     <ng-container *ngFor="let comment of comments">
-      <app-cost-comment [comment]="comment"></app-cost-comment>
+      <app-cost-comment
+        [comment]="comment"
+        (removeCommentEmitter)="removeComment($event)"
+        (addCommentEmitter)="addComment($event)"
+      ></app-cost-comment>
     </ng-container>
     <ng-container *ngIf="comments.length > 0">
       <app-new-comment

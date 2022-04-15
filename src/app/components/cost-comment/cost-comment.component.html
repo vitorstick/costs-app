@@ -1,9 +1,20 @@
-<div class="comment-container">
-  <div class="comment-container__type">{{ comment?.type }}</div>
-  <div class="comment-container__comment">{{ comment?.comment }}</div>
-  <div class="comment-container__author">{{ comment?.author }}</div>
-  <div class="comment-container__date">
-    {{ comment?.date | date: "medium" }}
+<ng-container *ngIf="editMode; else viewMode">
+  <app-new-comment
+    [existingComment]="comment"
+    (addCommentEmitter)="addComment($event)"
+  ></app-new-comment>
+</ng-container>
+<ng-template #viewMode>
+  <div class="comment-container">
+    <div class="comment-container__type">{{ comment?.type }}</div>
+    <div class="comment-container__comment">{{ comment?.comment }}</div>
+    <div class="comment-container__author">{{ comment?.author }}</div>
+    <div class="comment-container__date">
+      {{ comment?.date | date: "medium" }}
+    </div>
+    <div class="comment-container__actions">
+      <button (click)="edit()">&#9851;</button>
+      <button (click)="remove()">&#9760;</button>
+    </div>
   </div>
-  <div class="comment-container__actions"></div>
-</div>
+</ng-template>

@@ -10,6 +10,9 @@ import { CostsContainerComponent } from './containers';
 import { CostItemComponent } from './components/cost-item/cost-item.component';
 import { CostCommentComponent } from './components/cost-comment/cost-comment.component';
 import { NewCommentComponent } from './components/new-comment/new-comment.component';
+import { CostConvertedComponent } from './components/cost-converted/cost-converted.component';
+import { CostTotalComponent } from './components/cost-total/cost-total.component';
+import { ConvertedAmountPipe } from './pipes/converted-amount.pipe';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { NewCommentComponent } from './components/new-comment/new-comment.compon
     CostItemComponent,
     CostCommentComponent,
     NewCommentComponent,
+    CostConvertedComponent,
+    CostTotalComponent,
+    ConvertedAmountPipe,
   ],
   imports: [
     BrowserModule,

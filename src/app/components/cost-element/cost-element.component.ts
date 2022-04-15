@@ -1,10 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
-import { CostInterface } from 'src/app/models';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { CostInterface, CostType } from 'src/app/models';
 
 @Component({
   selector: 'app-cost-element',
@@ -12,10 +7,40 @@ import { CostInterface } from 'src/app/models';
   styleUrls: ['./cost-element.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CostElementComponent implements OnInit {
+export class CostElementComponent {
   @Input('cost') cost: CostInterface | undefined;
 
-  constructor() {}
+  get totalQuoted(): number {
+    if (this.cost) {
+      return this.cost?.costItems.reduce((total, costItem) => {
+        return (
+          total +
+          costItem.costs.reduce((total, cost) => {
+            if (cost.type === CostType.Quoted) {
+              return total + cost.amount;
+            }
+            return total;
+          }, 0)
+        );
+      }, 0);
+    }
+    return 0;
+  }
 
-  ngOnInit(): void {}
+  get totalScreened(): number {
+    if (this.cost) {
+      return this.cost?.costItems.reduce((total, costItem) => {
+        return (
+          total +
+          costItem.costs.reduce((total, cost) => {
+            if (cost.type === CostType.Screened) {
+              return total + cost.amount;
+            }
+            return total;
+          }, 0)
+        );
+      }, 0);
+    }
+    return 0;
+  }
 }

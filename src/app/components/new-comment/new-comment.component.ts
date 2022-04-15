@@ -4,9 +4,10 @@ import {
   ChangeDetectionStrategy,
   Output,
   EventEmitter,
+  Input,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CommentType, NewComment } from 'src/app/models';
+import { CommentInterface, CommentType, NewComment } from 'src/app/models';
 
 @Component({
   selector: 'app-new-comment',
@@ -18,8 +19,17 @@ export class NewCommentComponent implements OnInit {
   @Output() readonly addCommentEmitter: EventEmitter<NewComment> =
     new EventEmitter();
 
+  @Input('existingComment')
+  set existingComment(comment: CommentInterface | undefined) {
+    if (comment) {
+      this.comment = comment;
+      this.createCommentForm();
+    }
+  }
+
   commentForm!: FormGroup;
 
+  private comment!: CommentInterface;
   private readonly commentTypeEnum = CommentType;
 
   get commentType(): string[] {
@@ -45,8 +55,8 @@ export class NewCommentComponent implements OnInit {
 
   private createCommentForm() {
     this.commentForm = new FormGroup({
-      type: new FormControl('', Validators.required),
-      comment: new FormControl('', [
+      type: new FormControl(this.comment?.type ?? '', Validators.required),
+      comment: new FormControl(this.comment?.comment ?? '', [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(100),

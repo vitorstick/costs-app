@@ -72,8 +72,6 @@ export class CostTableComponent implements OnChanges {
   private _exchangeRates!: ExchangeRateInterface;
   protected destroyed$ = new Subject<void>();
 
-  constructor() {}
-
   ngOnChanges() {
     if (this._costs && this._exchangeRates) {
       this.createRateForm(this._costs.daCurrency.currency);

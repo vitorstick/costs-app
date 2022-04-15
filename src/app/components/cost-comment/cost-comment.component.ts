@@ -3,8 +3,10 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   Input,
+  EventEmitter,
+  Output,
 } from '@angular/core';
-import { CommentInterface } from 'src/app/models';
+import { CommentInterface, NewComment } from 'src/app/models';
 
 @Component({
   selector: 'app-cost-comment',
@@ -12,10 +14,32 @@ import { CommentInterface } from 'src/app/models';
   styleUrls: ['./cost-comment.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CostCommentComponent implements OnInit {
+export class CostCommentComponent {
   @Input('comment') comment: CommentInterface | undefined;
 
-  constructor() {}
+  @Output() readonly removeCommentEmitter: EventEmitter<number> =
+    new EventEmitter();
 
-  ngOnInit(): void {}
+  @Output() readonly addCommentEmitter: EventEmitter<NewComment> =
+    new EventEmitter();
+
+  editMode = false;
+
+  remove() {
+    if (this.comment?.id) {
+      this.removeCommentEmitter.emit(this.comment.id);
+    }
+  }
+
+  edit() {
+    this.editMode = true;
+  }
+
+  addComment(newComment: NewComment) {
+    if (this.comment?.id) {
+      this.removeCommentEmitter.emit(this.comment.id);
+    }
+    this.addCommentEmitter.emit(newComment);
+    this.editMode = false;
+  }
 }

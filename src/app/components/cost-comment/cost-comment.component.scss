@@ -9,15 +9,19 @@
     width: 10%;
   }
   &__comment {
-    width: 60%;
+    width: 50%;
   }
   &__author {
     width: 10%;
   }
   &__date {
-    width: 15%;
+    width: 20%;
   }
   &__actions {
-    width: 5%;
+    width: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
   }
 }

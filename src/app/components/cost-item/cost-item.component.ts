@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CalculationHelper } from 'src/app/helpers/calculation-helper';
 import {
   BaseCurrencyInterface,
@@ -21,7 +16,7 @@ import {
   styleUrls: ['./cost-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CostItemComponent implements OnInit {
+export class CostItemComponent {
   @Input('costItem') costItem: CostItemInterface | undefined;
   @Input('baseCurrency') baseCurrency: BaseCurrencyInterface | undefined;
   @Input('daCurrency') daCurrency: DaCurrencyInterface | undefined;
@@ -50,11 +45,8 @@ export class CostItemComponent implements OnInit {
     return costItem?.amount ?? 0;
   }
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
   addComment(newComment: NewComment) {
+    // INSTEAD OF THIS WE SHOULD PASS IT TO THE SMART COMPONENT AND USE A SERVICE TO CALL THE API
     const comment: CommentInterface = {
       ...newComment,
       date: new Date(),
@@ -64,11 +56,20 @@ export class CostItemComponent implements OnInit {
       persona: '',
       author: this.author,
     };
-
     this.costItem?.comments?.push(comment);
   }
 
   getExchangeRateValue(fromCurrency: number, rate: number): number {
     return CalculationHelper.getValue(fromCurrency, rate);
+  }
+
+  removeComment(commentId: number) {
+    // INSTEAD OF THIS WE SHOULD PASS IT TO THE SMART COMPONENT AND USE A SERVICE TO CALL THE API
+    const filteredComments = this.costItem?.comments?.filter(
+      (comment) => comment.id !== commentId
+    );
+    if (this.costItem) {
+      this.costItem.comments = [...(filteredComments ?? [])];
+    }
   }
 }
