@@ -20,6 +20,7 @@ export class CostConvertedComponent implements OnInit {
   ngOnInit(): void {}
 
   getExchangeRateValue(rate: number): number {
-    return CalculationHelper.getValue(this.costValue, rate);
+    // return CalculationHelper.getValue(this.costValue, rate);
+    return 0;
   }
 }

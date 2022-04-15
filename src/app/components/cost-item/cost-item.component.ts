@@ -60,7 +60,8 @@ export class CostItemComponent {
   }
 
   getExchangeRateValue(fromCurrency: number, rate: number): number {
-    return CalculationHelper.getValue(fromCurrency, rate);
+    // return CalculationHelper.getValueInCurrency(fromCurrency, rate);
+    return 0;
   }
 
   removeComment(commentId: number) {

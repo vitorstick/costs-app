@@ -17,6 +17,7 @@ import {
   ExchangeRateInterface,
   PaymentCurrenciesInterface,
 } from 'src/app/models';
+import { CommunicationService } from 'src/app/services';
 
 @Component({
   selector: 'app-cost-table',
@@ -25,8 +26,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CostTableComponent implements OnChanges {
-  rateForm!: FormGroup;
-
   get costs(): CostViewModel {
     return this._costs;
   }
@@ -57,20 +56,23 @@ export class CostTableComponent implements OnChanges {
   }
 
   get exchangeRate(): number {
-    if (this._costs) {
-      return CalculationHelper.getValue(
-        1,
-        this._costs.baseCurrency.exchangeRate
-      );
-    }
+    // if (this._costs) {
+    //   return CalculationHelper.getValue(
+    //     1,
+    //     this._costs.baseCurrency.exchangeRate
+    //   );
+    // }
     return 0;
   }
 
+  rateForm!: FormGroup;
   selectedPaymentCurrencies!: PaymentCurrenciesInterface | null;
 
   private _costs!: CostViewModel;
   private _exchangeRates!: ExchangeRateInterface;
   protected destroyed$ = new Subject<void>();
+
+  constructor(private communicationService: CommunicationService) {}
 
   ngOnChanges() {
     if (this._costs && this._exchangeRates) {
@@ -95,7 +97,15 @@ export class CostTableComponent implements OnChanges {
         );
 
         this.selectedPaymentCurrencies = chosenPaymentCurrency ?? null;
-        console.log(value.rate, chosenPaymentCurrency);
+        this.setCommunicationServiceChosenPaymentCurrency();
       });
+  }
+
+  private setCommunicationServiceChosenPaymentCurrency() {
+    if (this.selectedPaymentCurrencies) {
+      this.communicationService.setFormForSplitExpense(
+        this.selectedPaymentCurrencies
+      );
+    }
   }
 }
