@@ -1,14 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CalculationHelper } from 'src/app/helpers/calculation-helper';
 import {
-  BaseCurrencyInterface,
   CommentInterface,
-  CostItemCostInterface,
   CostItemInterface,
   CostType,
-  DaCurrencyInterface,
   NewComment,
+  PaymentCurrenciesInterface,
 } from 'src/app/models';
 
 @Component({
@@ -19,8 +16,8 @@ import {
 })
 export class CostItemComponent {
   @Input('costItem') costItem: CostItemInterface | undefined;
-  @Input('baseCurrency') baseCurrency: BaseCurrencyInterface | undefined;
-  @Input('daCurrency') daCurrency: DaCurrencyInterface | undefined;
+  @Input('selectedPaymentCurrencies')
+  selectedPaymentCurrencies: PaymentCurrenciesInterface | null = null;
   // TODO: LOGGED IN USER FOR AUTHOR?
   @Input('author') author: string = 'Mr. John Doe';
 

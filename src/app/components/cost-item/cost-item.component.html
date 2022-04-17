@@ -6,14 +6,14 @@
     </div>
     <div class="costs-item-container__header-quoted">
       <div>
-        {{ quotedCost }}
+        {{ selectedPaymentCurrencies?.toCurrency }} {{ quotedCost }}
       </div>
       <div class="converted-value">
         <app-cost-converted [costValue]="quotedCost"></app-cost-converted>
       </div>
     </div>
     <div class="costs-item-container__header-screened" [formGroup]="screenedCostForm">
-      <input type="number" placeholder="screened cost" formControlName="screenedCost" />
+      {{ selectedPaymentCurrencies?.toCurrency }} <input type="number" placeholder="screened cost" formControlName="screenedCost" />
       <div class="converted-value">
         <app-cost-converted [costValue]="screenedCostFromForm"></app-cost-converted>
       </div>

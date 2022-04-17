@@ -57,12 +57,16 @@ export class CostTableComponent implements OnChanges {
   }
 
   get exchangeRate(): number {
-    // if (this._costs) {
-    //   return CalculationHelper.getValue(
-    //     1,
-    //     this._costs.baseCurrency.exchangeRate
-    //   );
-    // }
+    if (this._costs) {
+      return (
+        1 /
+        CalculationHelper.getValueInCurrency(
+          1,
+          this.selectedPaymentCurrencies?.exchangeRate ?? 1,
+          this._costs.baseCurrency.exchangeRate
+        )
+      );
+    }
     return 0;
   }
 

@@ -5,7 +5,12 @@ import {
   ViewChildren,
   QueryList,
 } from '@angular/core';
-import { CostInterface, CostType } from 'src/app/models';
+import {
+  BaseCurrencyInterface,
+  CostInterface,
+  CostType,
+  PaymentCurrenciesInterface,
+} from 'src/app/models';
 import { CostItemComponent } from '../cost-item/cost-item.component';
 
 @Component({
@@ -16,6 +21,8 @@ import { CostItemComponent } from '../cost-item/cost-item.component';
 })
 export class CostElementComponent {
   @Input('cost') cost: CostInterface | undefined;
+  @Input('selectedPaymentCurrencies')
+  selectedPaymentCurrencies: PaymentCurrenciesInterface | null = null;
 
   @ViewChildren(CostItemComponent) costItems!: QueryList<CostItemComponent>;
 

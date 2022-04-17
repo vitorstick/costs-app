@@ -1,11 +1,11 @@
 <div class="total-container">
   <div class="total-container__title">Total</div>
   <div class="total-container__value">
-    {{ totalQuoted }}
+    {{ selectedPaymentCurrencies?.toCurrency }} {{ totalQuoted }}
     <app-cost-converted [costValue]="totalQuoted"></app-cost-converted>
   </div>
   <div class="total-container__value">
-    {{ totalScreened }}
+    {{ selectedPaymentCurrencies?.toCurrency }} {{ totalScreened }}
     <app-cost-converted [costValue]="totalScreened"></app-cost-converted>
   </div>
 </div>

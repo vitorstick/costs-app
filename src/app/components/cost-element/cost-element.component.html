@@ -8,11 +8,12 @@
   </div>
   <div class="costs-container__content">
     <ng-container *ngFor="let costItem of cost?.costItems">
-      <app-cost-item [costItem]="costItem"></app-cost-item>
+      <app-cost-item [costItem]="costItem" [selectedPaymentCurrencies]="selectedPaymentCurrencies"></app-cost-item>
     </ng-container>
   </div>
   <app-cost-total
     [totalQuoted]="totalQuoted"
     [totalScreened]="totalScreenedForm"
+    [selectedPaymentCurrencies]="selectedPaymentCurrencies"
   ></app-cost-total>
 </div>

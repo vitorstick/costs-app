@@ -24,6 +24,6 @@ export class CalculationHelper {
       factorToBaseCurrency
     );
     // return valueInBaseCurrency;
-    return Math.round(valueInBaseCurrency * 100) / 100;
+    return Math.round(valueInBaseCurrency * 10000) / 10000;
   }
 }

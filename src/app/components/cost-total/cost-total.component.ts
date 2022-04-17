@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { PaymentCurrenciesInterface } from 'src/app/models';
 
 @Component({
   selector: 'app-cost-total',
@@ -9,4 +10,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 export class CostTotalComponent {
   @Input('totalQuoted') totalQuoted: number = 0;
   @Input('totalScreened') totalScreened: number = 0;
+
+  @Input('selectedPaymentCurrencies')
+  selectedPaymentCurrencies: PaymentCurrenciesInterface | null = null;
 }

@@ -14,14 +14,14 @@
         </select>
       </form>
       <div class="costs-container__header-ratio">
-        1 {{ baseCurrency?.currency }} {{ exchangeRate }}
+        1 {{ baseCurrency?.currency }} {{ exchangeRate | number: '1.4-4' }}
         {{ selectedPaymentCurrencies?.toCurrency }}
       </div>
     </div>
   </div>
   <div class="costs-container__content">
     <ng-container *ngFor="let cost of costElements">
-      <app-cost-element [cost]="cost"></app-cost-element>
+      <app-cost-element [cost]="cost" [selectedPaymentCurrencies]="selectedPaymentCurrencies"></app-cost-element>
     </ng-container>
   </div>
 </div>
