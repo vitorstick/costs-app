@@ -18,11 +18,11 @@
         <app-cost-converted [costValue]="screenedCostFromForm"></app-cost-converted>
       </div>
     </div>
-    <div class="costs-item-container__header-messages">
-      {{ commentsNumber }}
+    <div class="costs-item-container__header-messages" (click)="expandComments()">
+      <span>{{ commentsNumber }} </span><i class="material-icons">chat</i>
     </div>
   </div>
-  <div class="costs-item-container__comments">
+  <div class="costs-item-container__comments" [class.costs-item-container__comments--visible]="commentsExpanded">
     <ng-container *ngFor="let comment of comments">
       <app-cost-comment [comment]="comment" (removeCommentEmitter)="removeComment($event)"
         (addCommentEmitter)="addComment($event)"></app-cost-comment>

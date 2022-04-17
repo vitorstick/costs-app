@@ -13,8 +13,8 @@
       {{ comment?.date | date: "medium" }}
     </div>
     <div class="comment-container__actions">
-      <button (click)="edit()">&#9851;</button>
-      <button (click)="remove()">&#9760;</button>
+      <button (click)="edit()"><i class="material-icons">edit</i></button>
+      <button (click)="remove()"><i class="material-icons">restore_from_trash</i></button>
     </div>
   </div>
 </ng-template>

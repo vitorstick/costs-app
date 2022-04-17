@@ -48,6 +48,7 @@ export class CostItemComponent {
   }
 
   screenedCostForm!: FormGroup;
+  commentsExpanded: boolean = true;
 
   ngOnInit(): void {
     this.createScreenedCostForm();
@@ -80,6 +81,10 @@ export class CostItemComponent {
     if (this.costItem) {
       this.costItem.comments = [...(filteredComments ?? [])];
     }
+  }
+
+  expandComments() {
+    this.commentsExpanded = !this.commentsExpanded;
   }
 
   private createScreenedCostForm() {

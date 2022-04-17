@@ -1,3 +1,8 @@
 .converted {
   color: #939fa5;
+  display: flex;
+  width: 100%;
+  &__currency {
+    padding-right: 4px;
+  }
 }

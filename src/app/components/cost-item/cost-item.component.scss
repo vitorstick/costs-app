@@ -19,9 +19,34 @@
 
   &__comments {
     background: #edf7fc;
+    display: none;
+
+    &--visible {
+      display: block;
+    }
   }
 
   .converted-value {
     color: #939fa5;
   }
+
+  &__header-messages {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    > * {
+      padding: 4px;
+    }
+  }
+
+  &__header-quoted {
+    > div {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    }
+  }
+
 }
