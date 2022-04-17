@@ -2,8 +2,10 @@
   <div class="total-container__title">Total</div>
   <div class="total-container__value">
     {{ totalQuoted }}
+    <app-cost-converted [costValue]="totalQuoted"></app-cost-converted>
   </div>
   <div class="total-container__value">
     {{ totalScreened }}
+    <app-cost-converted [costValue]="totalScreened"></app-cost-converted>
   </div>
 </div>

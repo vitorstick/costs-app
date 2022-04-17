@@ -33,6 +33,7 @@ export class CostTableComponent implements OnChanges {
   set costs(items: CostViewModel) {
     if (items) {
       this._costs = items;
+      this.callSetComunicationServiceBaseCurrency(this._costs.baseCurrency);
     }
   }
 
@@ -106,6 +107,14 @@ export class CostTableComponent implements OnChanges {
       this.communicationService.setFormForSplitExpense(
         this.selectedPaymentCurrencies
       );
+    }
+  }
+
+  private callSetComunicationServiceBaseCurrency(
+    baseCurrency: BaseCurrencyInterface
+  ) {
+    if (baseCurrency) {
+      this.communicationService.setBaseCurrency(baseCurrency);
     }
   }
 }

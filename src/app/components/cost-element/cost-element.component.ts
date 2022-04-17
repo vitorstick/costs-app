@@ -1,5 +1,12 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  ViewChildren,
+  QueryList,
+} from '@angular/core';
 import { CostInterface, CostType } from 'src/app/models';
+import { CostItemComponent } from '../cost-item/cost-item.component';
 
 @Component({
   selector: 'app-cost-element',
@@ -9,6 +16,8 @@ import { CostInterface, CostType } from 'src/app/models';
 })
 export class CostElementComponent {
   @Input('cost') cost: CostInterface | undefined;
+
+  @ViewChildren(CostItemComponent) costItems!: QueryList<CostItemComponent>;
 
   get totalQuoted(): number {
     if (this.cost) {
@@ -27,20 +36,13 @@ export class CostElementComponent {
     return 0;
   }
 
-  get totalScreened(): number {
-    if (this.cost) {
-      return this.cost?.costItems.reduce((total, costItem) => {
-        return (
-          total +
-          costItem.costs.reduce((total, cost) => {
-            if (cost.type === CostType.Screened) {
-              return total + cost.amount;
-            }
-            return total;
-          }, 0)
-        );
+  get totalScreenedForm(): number {
+    if (this.costItems) {
+      return this.costItems.reduce((total, costItem) => {
+        return total + costItem.screenedCostFromForm;
       }, 0);
     }
+
     return 0;
   }
 }
