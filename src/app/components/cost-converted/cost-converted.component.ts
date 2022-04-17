@@ -41,7 +41,6 @@ export class CostConvertedComponent implements OnInit {
       this._costValue$,
     ]).pipe(
       map(([paymentCurrency, baseCurrency, value]) => {
-        console.log('map  paymentCurrency', paymentCurrency);
         if (paymentCurrency && baseCurrency) {
           const result = CalculationHelper.getValueInCurrency(
             value,

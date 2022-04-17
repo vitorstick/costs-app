@@ -12,7 +12,7 @@ describe('tax-amount-calculation', () => {
         toSGDFactor,
         toUSDFactor
       )
-    ).toBe(1519.64);
+    ).toBe(1519.6402);
   });
 
   it('should return the correct amount when value is in SGD', () => {
