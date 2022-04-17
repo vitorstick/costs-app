@@ -1,5 +1,5 @@
 <ng-container *ngIf="costElement as costElement; else loading">
-  <app-cost-table [costs]="costElement" [exchangeRates]="exchangeRates$ | async"></app-cost-table>
+  <app-cost-table [costs]="costElement" [exchangeRates]="exchangeRates"></app-cost-table>
 </ng-container>
 <ng-template #loading>
   <p>

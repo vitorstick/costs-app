@@ -15,6 +15,11 @@
     justify-content: space-between;
     padding: 8px;
   }
+
+  &__header-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 }
 
 .costs-container__form-group {

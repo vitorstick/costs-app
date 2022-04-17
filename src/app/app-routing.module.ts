@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CostsContainerComponent } from './containers';
-import { CostResolver } from './services';
+import { CostResolver, RateResolver } from './services';
 
 const routes: Routes = [
   {
@@ -9,6 +9,7 @@ const routes: Routes = [
     component: CostsContainerComponent,
     resolve: {
       costs: CostResolver,
+      exchangeRates: RateResolver,
     },
   },
 ];

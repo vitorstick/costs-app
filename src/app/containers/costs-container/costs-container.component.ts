@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
 import { CostViewModel, ExchangeRateInterface } from 'src/app/models';
-import { CostsService } from 'src/app/services';
 
 @Component({
   selector: 'app-costs-container',
@@ -11,24 +8,12 @@ import { CostsService } from 'src/app/services';
 })
 export class CostsContainerComponent implements OnInit {
   costElement!: CostViewModel;
-  exchangeRates$!: Observable<ExchangeRateInterface>;
+  exchangeRates!: ExchangeRateInterface;
 
-  constructor(
-    private costsService: CostsService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.costElement = this.route.snapshot.data.costs;
-    this.exchangeRates$ = this.getExchangesRates();
-  }
-
-  private getExchangesRates(): Observable<ExchangeRateInterface> {
-    return this.costsService.getExchangesRates().pipe(
-      shareReplay({
-        bufferSize: 1,
-        refCount: true,
-      })
-    );
+    this.exchangeRates = this.route.snapshot.data.exchangeRates;
   }
 }
