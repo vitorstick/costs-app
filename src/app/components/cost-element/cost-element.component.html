@@ -6,9 +6,27 @@
     <div class="costs-container__header-screened">Screened</div>
     <div class="costs-container__header-messages"></div>
   </div>
-  <div class="costs-container__content">
-    <ng-container *ngFor="let costItem of cost?.costItems">
-      <app-cost-item [costItem]="costItem" [selectedPaymentCurrencies]="selectedPaymentCurrencies"></app-cost-item>
+  <div class="costs-container__content" [formGroup]="screenedCostsForm">
+    <ng-container *ngFor="let costItem of cost?.costItems; let i = index">
+      <app-cost-item
+        [costItem]="costItem"
+        [selectedPaymentCurrencies]="selectedPaymentCurrencies"
+        *ngIf="getCostsFormArray(i) as screenedControl"
+      >
+        <div screenedCost *ngIf="screenedControl?.get('screenedCost')">
+          {{ selectedPaymentCurrencies?.toCurrency }}
+          <input
+            type="number"
+            placeholder="screened cost"
+            [formControl]="$any(screenedControl?.get('screenedCost'))"
+          />
+        </div>
+        <div screenedCostFromForm>
+          <app-cost-converted
+            [costValue]="$any(screenedControl?.get('screenedCost'))?.value"
+          ></app-cost-converted>
+        </div>
+      </app-cost-item>
     </ng-container>
   </div>
   <app-cost-total

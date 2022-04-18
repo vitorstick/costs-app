@@ -5,30 +5,37 @@
       {{ costItem?.costItemAlias?.accountingCode }}
     </div>
     <div class="costs-item-container__header-quoted">
-      <div>
-        {{ selectedPaymentCurrencies?.toCurrency }} {{ quotedCost }}
-      </div>
+      <div>{{ selectedPaymentCurrencies?.toCurrency }} {{ quotedCost }}</div>
       <div class="converted-value">
         <app-cost-converted [costValue]="quotedCost"></app-cost-converted>
       </div>
     </div>
-    <div class="costs-item-container__header-screened" [formGroup]="screenedCostForm">
-      {{ selectedPaymentCurrencies?.toCurrency }} <input type="number" placeholder="screened cost" formControlName="screenedCost" />
-      <div class="converted-value">
-        <app-cost-converted [costValue]="screenedCostFromForm"></app-cost-converted>
-      </div>
+    <div class="costs-item-container__header-screened">
+      <ng-content select="[screenedCost]"></ng-content>
+      <ng-content select="[screenedCostFromForm]"></ng-content>
     </div>
-    <div class="costs-item-container__header-messages" (click)="expandComments()">
+    <div
+      class="costs-item-container__header-messages"
+      (click)="expandComments()"
+    >
       <span>{{ commentsNumber }} </span><i class="material-icons">chat</i>
     </div>
   </div>
-  <div class="costs-item-container__comments" [class.costs-item-container__comments--visible]="commentsExpanded">
+  <div
+    class="costs-item-container__comments"
+    [class.costs-item-container__comments--visible]="commentsExpanded"
+  >
     <ng-container *ngFor="let comment of comments">
-      <app-cost-comment [comment]="comment" (removeCommentEmitter)="removeComment($event)"
-        (addCommentEmitter)="addComment($event)"></app-cost-comment>
+      <app-cost-comment
+        [comment]="comment"
+        (removeCommentEmitter)="removeComment($event)"
+        (addCommentEmitter)="addComment($event)"
+      ></app-cost-comment>
     </ng-container>
     <ng-container *ngIf="comments.length > 0">
-      <app-new-comment (addCommentEmitter)="addComment($event)"></app-new-comment>
+      <app-new-comment
+        (addCommentEmitter)="addComment($event)"
+      ></app-new-comment>
     </ng-container>
   </div>
 </div>

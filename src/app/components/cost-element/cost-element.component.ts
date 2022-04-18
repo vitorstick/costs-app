@@ -2,16 +2,21 @@ import {
   Component,
   ChangeDetectionStrategy,
   Input,
-  ViewChildren,
-  QueryList,
+  OnInit,
 } from '@angular/core';
 import {
-  BaseCurrencyInterface,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
   CostInterface,
+  CostItemCostInterface,
   CostType,
   PaymentCurrenciesInterface,
 } from 'src/app/models';
-import { CostItemComponent } from '../cost-item/cost-item.component';
 
 @Component({
   selector: 'app-cost-element',
@@ -19,12 +24,9 @@ import { CostItemComponent } from '../cost-item/cost-item.component';
   styleUrls: ['./cost-element.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CostElementComponent {
+export class CostElementComponent implements OnInit {
   @Input('cost') cost: CostInterface | undefined;
-  @Input('selectedPaymentCurrencies')
-  selectedPaymentCurrencies: PaymentCurrenciesInterface | null = null;
-
-  @ViewChildren(CostItemComponent) costItems!: QueryList<CostItemComponent>;
+  @Input() selectedPaymentCurrencies: PaymentCurrenciesInterface | null = null;
 
   get totalQuoted(): number {
     if (this.cost) {
@@ -44,12 +46,51 @@ export class CostElementComponent {
   }
 
   get totalScreenedForm(): number {
-    if (this.costItems) {
-      return this.costItems.reduce((total, costItem) => {
-        return total + costItem.screenedCostFromForm;
-      }, 0);
-    }
+    return (
+      this.screenedCostsForm.get('costItems') as FormArray
+    ).controls.reduce((total, costItem) => {
+      console.log(costItem);
+      return total + costItem?.get('screenedCost')?.value ?? 0;
+    }, 0);
+  }
 
-    return 0;
+  screenedCostsForm!: FormGroup;
+
+  constructor(private formbuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.createForm();
+  }
+
+  getCostsFormArray(index: number) {
+    return (this.screenedCostsForm.get('costItems') as FormArray).at(index);
+  }
+
+  private createForm() {
+    this.screenedCostsForm = this.formbuilder.group({
+      costItems: this.formbuilder.array([]),
+    });
+
+    if (this.cost) {
+      this.cost.costItems.forEach((costItem) => {
+        const screenedCosts = costItem.costs.filter(
+          (cost) => cost.type === CostType.Screened
+        );
+
+        screenedCosts.forEach((costItem) => {
+          (this.screenedCostsForm.get('costItems') as FormArray).push(
+            this.createScreenedCostForm(costItem)
+          );
+        });
+      });
+    }
+  }
+
+  private createScreenedCostForm(
+    screenedCost: CostItemCostInterface
+  ): FormGroup {
+    return new FormGroup({
+      screenedCost: new FormControl(screenedCost.amount, Validators.required),
+    });
   }
 }

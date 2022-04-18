@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {
   CommentInterface,
   CostItemInterface,
@@ -43,16 +42,7 @@ export class CostItemComponent {
     return costItem?.amount ?? 0;
   }
 
-  get screenedCostFromForm(): number {
-    return this.screenedCostForm.get('screenedCost')?.value ?? 0;
-  }
-
-  screenedCostForm!: FormGroup;
   commentsExpanded: boolean = true;
-
-  ngOnInit(): void {
-    this.createScreenedCostForm();
-  }
 
   addComment(newComment: NewComment) {
     // INSTEAD OF THIS WE SHOULD PASS IT TO THE SMART COMPONENT AND USE A SERVICE TO CALL THE API
@@ -68,11 +58,6 @@ export class CostItemComponent {
     this.costItem?.comments?.push(comment);
   }
 
-  getExchangeRateValue(fromCurrency: number, rate: number): number {
-    // return CalculationHelper.getValueInCurrency(fromCurrency, rate);
-    return 0;
-  }
-
   removeComment(commentId: number) {
     // INSTEAD OF THIS WE SHOULD PASS IT TO THE SMART COMPONENT AND USE A SERVICE TO CALL THE API
     const filteredComments = this.costItem?.comments?.filter(
@@ -85,11 +70,5 @@ export class CostItemComponent {
 
   expandComments() {
     this.commentsExpanded = !this.commentsExpanded;
-  }
-
-  private createScreenedCostForm() {
-    this.screenedCostForm = new FormGroup({
-      screenedCost: new FormControl(this.screenedCost, Validators.required),
-    });
   }
 }
